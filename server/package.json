@@ -73,6 +73,5 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-
   }
 }
