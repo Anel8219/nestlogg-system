@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "start:prod": "tsc && node dist/main.js"
+  }
+}
