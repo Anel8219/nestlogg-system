@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Project {
+  id         String     @id @default(uuid())
+  name       String
+  activities Activity[]
+  createdAt  DateTime   @default(now())
+}
+
+model Activity {
+  id          String     @id @default(uuid())
+  sbefCode    String
+  title       String
+  start       DateTime
+  end         DateTime
+  status      String
+  project     Project    @relation(fields: [projectId], references: [id])
+  projectId   String
+  assignedTo  User?      @relation(fields: [userId], references: [id])
+  userId      String?
+  dependencies Dependency[] @relation("DependencyActivity")
+  blockers    Dependency[] @relation("BlockedByActivity")
+}
+
+model User {
+  id          String     @id @default(uuid())
+  name        String
+  role        String
+  email       String     @unique
+  activities  Activity[]
+}
+
+model Dependency {
+  id              String    @id @default(uuid())
+  activity        Activity  @relation("DependencyActivity", fields: [activityId], references: [id])
+  activityId      String
+  dependsOn       Activity  @relation("BlockedByActivity", fields: [dependsOnId], references: [id])
+  dependsOnId     String
+}
