@@ -62,8 +62,6 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-====  "scripts": {
-    "start:prod": "tsc && node dist/main.js"
->>> 6cf9dcb589f5b39e05bdc23feb7b9803c43161e2
+
   }
 }
